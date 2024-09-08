@@ -138,7 +138,7 @@ class Game {
 
         for (let i = 0; i < this.buttons.length; i++) {
             // Randomly generate positions for buttons within the given window
-            let x = Math.max(Math.min(Math.random() * width, width - offWidth), offWidth);
+            let x = Math.max(Math.min(Math.random() * width, width - offWidth - 5), offWidth);
             let y = Math.max(Math.min(Math.random() * height, height - offHeight), offHeight * 2);
 
             this.buttons[i].SetLocation(x + "px", y + "px");
@@ -216,7 +216,6 @@ function Reset() {
     while (buttons.length > 0) {
         buttons[0].remove();
     }
-    console.log(count);
     currentGame = new Game(count, 3, 2); // Start a new game
     setTimeout(() => currentGame.Begin(), 1000 * 5);
 }
