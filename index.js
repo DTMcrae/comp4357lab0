@@ -9,7 +9,7 @@ app.use("/css", express.static("./css"));
 app.use("/en", express.static("./lang/messages/en"));
 
 // Serve the HTML file
-app.get('/', (req, res) => {
+app.get('/0/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
