@@ -40,14 +40,15 @@ class FileHandler {
   deleteFile(fileName) {
     const filePath = path.join(this.basePath, fileName);
     return new Promise((resolve, reject) => {
-      fs.unlink(filePath, (err) => {
+      // Open the file in 'w' mode to truncate it (clear contents)
+      fs.writeFile(filePath, "", (err) => {
         if (err) {
           if (err.code === "ENOENT") {
             return reject(`Error 404: File "${fileName}" not found`);
           }
-          return reject("Error deleting the file");
+          return reject("Error clearing the file");
         }
-        resolve(`File "${fileName}" deleted successfully`);
+        resolve(`Contents of "${fileName}" cleared successfully`);
       });
     });
   }
