@@ -41,4 +41,15 @@ router.get("/readFile/:filename", async (req, res) => {
   }
 });
 
+router.get("/deleteFile/:filename", async (req, res) => {
+  const filename = req.params.filename;
+
+  try {
+    const result = await fileHandler.deleteFile(filename); // Use the FileHandler class to delete the file
+    res.send(result);
+  } catch (error) {
+    res.status(404).send(error); // Send 404 error if the file doesn't exist
+  }
+});
+
 module.exports = router;

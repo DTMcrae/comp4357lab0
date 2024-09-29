@@ -14,7 +14,6 @@ class FileHandler {
     return new Promise((resolve, reject) => {
       fs.appendFile(filePath, text + "\n", (err) => {
         if (err) {
-            console.log(err);
           return reject("Error writing to the file");
         }
         resolve(`Appended "${text}" to ${fileName}`);
@@ -34,6 +33,21 @@ class FileHandler {
           return reject("Error reading the file");
         }
         resolve(data);
+      });
+    });
+  }
+
+  deleteFile(fileName) {
+    const filePath = path.join(this.basePath, fileName);
+    return new Promise((resolve, reject) => {
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          if (err.code === "ENOENT") {
+            return reject(`Error 404: File "${fileName}" not found`);
+          }
+          return reject("Error deleting the file");
+        }
+        resolve(`File "${fileName}" deleted successfully`);
       });
     });
   }
