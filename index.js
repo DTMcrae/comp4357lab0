@@ -5,6 +5,10 @@ const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+app.options('*', cors());
+
 const lab0 = require("./lab0/route");
 const lab3 = require("./lab3/route");
 
