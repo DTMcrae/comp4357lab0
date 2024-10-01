@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 
+const cors = require('cors');
+router.use(cors());
+router.options('*', cors());
+
 const FileHandler = require("./modules/files");
 const fileHandler = new FileHandler(__dirname + "/storage");
 
@@ -18,7 +22,8 @@ router.get("/getDate", (req, res) => {
         </body>
     </html>
     `;
-  res.send(response);
+    res.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
+  res.end(response);
 });
 
 router.get("/writeFile", async (req, res) => {
