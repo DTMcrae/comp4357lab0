@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const router = express.router();
+const router = express.Router();
 const PORT = process.env.PORT || 4000;
 
 const dictionary = {};
