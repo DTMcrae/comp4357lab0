@@ -44,14 +44,14 @@ router.post("/api/definitions", (req, res) => {
     if(word === undefined || definition === undefined)
         {
             let message = `Request #${requestCount}, word: '${word}' or definition: '${definition}' is not valid.`;
-            res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
+            res.writeHead(400, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
             res.end(message);
             return;
         }
 
     else if(word in dictionary) {
         let message = `Request #${requestCount}, a definition for ${word} already exists.`;
-        res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
+        res.writeHead(400, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
         res.end(message);
         return;
     }
@@ -61,7 +61,7 @@ router.post("/api/definitions", (req, res) => {
 
         dictionary[word] = definition;
 
-        res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
+        res.writeHead(200, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
         res.end(message);
     }
 })
