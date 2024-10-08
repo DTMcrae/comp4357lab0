@@ -1,12 +1,12 @@
 class Messages {
   constructor() {
-    this.greeting =
-      "Hello %1, it's a beautiful day today. Server current date and time is";
-    this.fileNotFound = "File not found";
+    this.wordNotFound =
+      "Request#%1, word %2 not found";
   }
 
-  getGreeting(name) {
-    return this.greeting.replace("%1", name);
+  wordNotFound(num, word) {
+    let result = this.greeting.replace("%1", num);
+    return result.replace("%2", word);
   }
 }
 

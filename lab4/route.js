@@ -19,6 +19,7 @@ router.get("/api/definitions/", (req, res) => {
     requestCount++;
 
     let word = req.query.word;
+
     if(word === undefined || !(word in dictionary))
     {
         let message = `Request #${requestCount}, word '${word}' not found.`;
@@ -32,16 +33,21 @@ router.get("/api/definitions/", (req, res) => {
     res.end(response);
 });
 
-router.post("/api/definitions/", (req, res) => {
-    let word = req.body.word;
+router.post("/api/definitions", (req, res) => {
+    requestCount++;
 
-    if(word === undefined)
-    {
-        let message = `Request #${requestCount}, '${word}' is not a valid word.`;
-        res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
-        res.end(message);
-        return;
-    }
+    console.log(req.body);
+
+    let word = req.body.word;
+    let definition = req.body.definition;
+
+    if(word === undefined || definition === undefined)
+        {
+            let message = `Request #${requestCount}, word: '${word}' or definition: '${definition}' is not valid.`;
+            res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
+            res.end(message);
+            return;
+        }
 
     else if(word in dictionary) {
         let message = `Request #${requestCount}, a definition for ${word} already exists.`;
@@ -52,6 +58,9 @@ router.post("/api/definitions/", (req, res) => {
 
     else {
         let message = `Request #${requestCount}, definition added for ${word}. Updated: ${utils.getCurrentDate()}`;
+
+        dictionary[word] = definition;
+
         res.writeHead(404, {"Content-Type": "text/html", "Access-Control-Allow-Origin": "*"});
         res.end(message);
     }
