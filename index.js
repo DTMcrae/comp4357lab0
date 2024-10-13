@@ -12,10 +12,12 @@ app.options('*', cors());
 const lab0 = require("./lab0/route");
 const lab3 = require("./lab3/route");
 const lab4 = require("./lab4/route");
+const lab5 = require("./lab5/route");
 
 app.use("/0", lab0);
 app.use("/3", lab3);
 app.use("/4", lab4);
+app.use("/5", lab5);
 
 // Listen on the defined port
 app.listen(PORT, () => {
