@@ -1,12 +1,12 @@
 const express = require("express");
 const db = require("./modules/databaseConnection"); // Import the database connection module
 
-const cors = require("cors");
-app.use(cors());
-app.options("*", cors());
-
 // Create a router instance
 const router = express.Router();
+
+const cors = require("cors");
+router.use(cors());
+router.options("*", cors());
 
 // Function to create the patients table if it doesn't exist
 async function createPatientsTable() {
