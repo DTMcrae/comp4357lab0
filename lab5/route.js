@@ -1,6 +1,10 @@
 const express = require("express");
 const db = require("./modules/databaseConnection"); // Import the database connection module
 
+const cors = require("cors");
+app.use(cors());
+app.options("*", cors());
+
 // Create a router instance
 const router = express.Router();
 
