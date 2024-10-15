@@ -33,6 +33,8 @@ createPatientsTable();
 router.post("/api/sql", async (req, res) => {
   const { query } = req.body;
 
+  await createPatientsTable();
+
   if (query) {
     const lowerCaseQuery = query.toLowerCase();
 
@@ -58,6 +60,8 @@ router.post("/api/sql", async (req, res) => {
 router.get("/api/sql/:query", async (req, res) => {
   const { query } = req.params;
   const lowerCaseQuery = decodeURIComponent(query).toLowerCase();
+
+  await createPatientsTable();
 
   // Only allow SELECT queries
   if (lowerCaseQuery.startsWith("select")) {
